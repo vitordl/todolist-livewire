@@ -13,7 +13,7 @@ class DeleteUser implements DeletesUsers
      */
     public function delete(User $user): void
     {
-        Log::info('[DELETE]'.now().' - O usuário '.auth()->user()->id. ' de e-mail '.auth()->user()->email.' deletou a conta');
+        Log::info('[DELETE]'.now().' - User '.auth()->user()->id. ' with e-mail '.auth()->user()->email.' deleted their account');
         $user->deleteProfilePhoto();
         $user->tokens->each->delete();
         $user->delete();

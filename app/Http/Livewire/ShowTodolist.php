@@ -42,14 +42,14 @@ class ShowTodolist extends Component
     public function create(){
         /* dd($this->texto); */
         if(Todolist::where('user_id', auth()->user()->id)->count() >= 300){
-            session()->flash('message', 'Você atingiu o limite de 300 itens no nosso banco de dados!');
+            session()->flash('message', 'You have reached the limit of 300 items in our database');
             return redirect()->to('dashboard');
         }
 
         $this->validate();
 
         if($this->editedId != null){
-            Log::info('[EDITED]'.now().' - O usuário '.auth()->user()->id. ' de e-mail '.auth()->user()->email.' editou a task '.$this->editedId);
+            Log::info('[EDITED]'.now().' - User '.auth()->user()->id. ' with e-mail '.auth()->user()->email.' edited the task '.$this->editedId);
 
             Todolist::where('id', $this->editedId)->update([
                 'content' => $this->task,
@@ -60,7 +60,7 @@ class ShowTodolist extends Component
 
         }else{
 
-            Log::info('[CREATE]'.now().' - O usuário '.auth()->user()->id. ' de e-mail '.auth()->user()->email.' criou uma task');
+            Log::info('[CREATE]'.now().' - User '.auth()->user()->id. ' with e-mail '.auth()->user()->email.' created a task');
 
             Todolist::create([
                 'content' => $this->task,
@@ -75,7 +75,7 @@ class ShowTodolist extends Component
         $todolist = Todolist::where('id', $id)->first();
         Todolist::where('id', $id)->update(['status' => $newStatus]);
         if($todolist->status != $newStatus){
-            Log::info('[MOVING]'.now().' - O usuário '.auth()->user()->id. ' de e-mail '.auth()->user()->email.' moveu uma task '.$todolist->status.' para '.$newStatus);
+            Log::info('[MOVING]'.now().' - User '.auth()->user()->id. ' with e-mail '.auth()->user()->email.' moved a task '.$todolist->status.' TO '.$newStatus);
         }
 
     }
@@ -86,7 +86,7 @@ class ShowTodolist extends Component
     }
 
     public function delete(){
-        Log::info('[DELETE]'.now().' - O usuário '.auth()->user()->id. ' de e-mail '.auth()->user()->email.' deletou a task '.$this->deleteId);
+        Log::info('[DELETE]'.now().' - User '.auth()->user()->id. ' with e-mail '.auth()->user()->email.' deleted the task '.$this->deleteId);
         $todolist = Todolist::findOrFail($this->deleteId);
         $todolist->delete();
         $this->modal = false;
