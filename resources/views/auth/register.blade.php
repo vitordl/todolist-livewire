@@ -9,7 +9,7 @@
         @if(session()->has('message'))
             {{ session('message')}}
             <div class="flex justify-center mt-4">
-                <a href="{{route('welcome')}}" class="text-green-600"><strong>Voltar no início</strong></a> 
+                <a href="{{route('welcome')}}" class="text-green-600"><strong>Back to home</strong></a> 
             </div>
             
         @else        
