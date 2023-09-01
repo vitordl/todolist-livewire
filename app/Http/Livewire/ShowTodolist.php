@@ -42,7 +42,7 @@ class ShowTodolist extends Component
     public function create(){
         /* dd($this->texto); */
         if(Todolist::where('user_id', auth()->user()->id)->count() >= 300){
-            session()->flash('message', 'Você atingiu o limite de 300 itens no nosso banco de dados');
+            session()->flash('message', 'Você atingiu o limite de 300 itens no nosso banco de dados!');
             return redirect()->to('dashboard');
         }
 
